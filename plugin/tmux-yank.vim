@@ -10,7 +10,7 @@ let g:loaded_tmux_yank = 1
 
 " Function to yank to OSC-52.
 function! TmuxYank()
-    let buffer=system('base64 -w0', @0)
+    let buffer=system('base64', @0)
     let buffer=substitute(buffer, "\n$", "", "")
     let buffer='\e]52;c;'.buffer.'\x07'
     silent exe "!echo -ne ".shellescape(buffer)." > ".system("tmux display -p '#{pane_tty}'")
